@@ -1,2 +1,25 @@
 <h1>Photobooth</h1>
 <p>Welcome to the Photobooth</p>
+
+<video autoplay controls></video>
+
+<script>
+  var errorCallback = function(e) {
+    console.log('Failed', e);
+  };
+
+  navigator.getUserMedia  = navigator.getUserMedia ||
+                            navigator.webkitGetUserMedia ||
+                            navigator.mozGetUserMedia ||
+                            navigator.msGetUserMedia;
+
+  var video = document.querySelector('video');
+
+  if (navigator.getUserMedia) {
+    navigator.getUserMedia({video: true}, function(stream) {
+      video.src = window.URL.createObjectURL(stream);
+    }, errorCallback);
+  } else {
+    alert('Your browser is not supported.'); // fallback.
+  }
+</script>
