@@ -8,10 +8,8 @@
 </div>
 
 <%= form_for @photo do |f| %>
-  <%= f.label :url %>
-  <%= f.text_field :url %>
-  <%= f.label :album_id %>
-  <%= f.text_field :album_id, :value => @album.id %>
+  <%= f.hidden_field :url %>
+  <%= f.hidden_field :album_id, :value => @album.id %>
   <%= f.submit 'Save photo' %>
 <% end %>
 
