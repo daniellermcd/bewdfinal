@@ -3,17 +3,14 @@
 
 <video autoplay></video>
 <img src="">
-<canvas style="display:none;"></canvas>
+<canvas width="500px" height="400px" style="display:none;"></canvas>
 
 <div>
   <button type="button">Click me</button>
+  <span id="countdown"></span>
 </div>
 
 <script>
-  var errorCallback = function(e) {
-    console.log('Failed', e);
-  };
-
   navigator.getUserMedia  = navigator.getUserMedia ||
                             navigator.webkitGetUserMedia ||
                             navigator.mozGetUserMedia ||
@@ -23,6 +20,8 @@
   var canvas = document.querySelector('canvas');
   var button = document.querySelector('button');
   var ctx = canvas.getContext('2d');
+  var img = document.querySelector('img');
+  var countdown = document.getElementById('countdown');
   var localMediaStream = null;
 
   function snapshot() {
@@ -30,17 +29,34 @@
       ctx.drawImage(video, 0, 0);
       // "image/webp" works in Chrome.
       // Other browsers will fall back to image/png.
-      document.querySelector('img').src = canvas.toDataURL('image/webp');
+      img.src = canvas.toDataURL('image/webp');
     }
   }
 
-  button.addEventListener('click', snapshot, false);
+  function startCountdown() {
+    var count = 5;
+    countdown.innerText = count;
+
+    var counter = setInterval(timer, 1000);
+
+    function timer() {
+      count--;
+      if (count === 0) {
+        clearInterval(counter);
+        snapshot();
+      }
+
+      countdown.innerText = count;
+    }
+  }
+
+  button.addEventListener('click', startCountdown, false);
 
   if (navigator.getUserMedia) {
     navigator.getUserMedia({video: true}, function(stream) {
       video.src = window.URL.createObjectURL(stream);
       localMediaStream = stream;
-    }, errorCallback);
+    }, function(){alert('Failed');});
   } else {
     alert('Your browser is not supported.'); // fallback.
   }
