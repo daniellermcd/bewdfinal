@@ -4,3 +4,13 @@
 </div>
 
 <%= render 'photo_booth' %>
+
+<div>
+  <% if @album_photos.empty? %>
+    blah
+  <% else %>
+    <%= @album_photos.map do |photo| %>
+      <%= image_tag photo.url %>
+    <% end %>
+  <% end %>
+</div>
