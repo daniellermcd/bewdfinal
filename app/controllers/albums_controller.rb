@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
   def show
     @album = Album.find params[:id]
+    @photo = @album.photos.new
   end
 
   def new

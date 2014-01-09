@@ -1,0 +1,5 @@
+<ul>
+  <li><%= link_to "Back to #{@photo.album.title}", @photo.album %></li>
+  <li>Photo by: <%= @photo.user.email %></li>
+</ul>
+<%= image_tag @photo.url %>

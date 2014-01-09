@@ -7,6 +7,16 @@
   <span id="countdown" style="display:none"></span>
 </div>
 
+<%= form_for @photo do |f| %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <%= f.label :album_id %>
+  <%= f.text_field :album_id, :value => @album.id %>
+  <%= f.submit 'Save photo' %>
+<% end %>
+
+<button type="button">Retake</button>
+
 <script>
   navigator.getUserMedia  = navigator.getUserMedia ||
                             navigator.webkitGetUserMedia ||
@@ -18,6 +28,7 @@
   var button = document.querySelector('button');
   var ctx = canvas.getContext('2d');
   var img = document.querySelector('img');
+  var photo_url_field = document.querySelector('#photo_url');
   var countdown = document.getElementById('countdown');
   var localMediaStream = null;
 
@@ -26,14 +37,16 @@
       ctx.drawImage(video, 0, 0);
       // "image/webp" works in Chrome.
       // Other browsers will fall back to image/png.
-      img.src = canvas.toDataURL('image/webp');
+      var url = canvas.toDataURL('image/webp');
+      img.src = url;
+      photo_url_field.value = url;
     }
   }
 
   function startCountdown() {
     countdown.style.removeProperty('display');
 
-    var count = 5;
+    var count = 1;
     countdown.innerText = count;
 
     var counter = setInterval(timer, 1000);
