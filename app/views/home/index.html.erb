@@ -1,66 +1,19 @@
-<h1>Photobooth</h1>
-<p>Welcome to the Photobooth</p>
+<%= render 'header' %>
 
-<video autoplay></video>
-<img src="">
-<canvas width="500px" height="400px" style="display:none;"></canvas>
+<% if !user_signed_in? %>
+  <ul>
+    <li><%= link_to "Sign up", new_user_registration_path %></li>
+    <li><%= link_to "Log in", new_user_session_path %></li>
+  </ul>
+<% else %>
+  <ul>
+    <li><%= link_to "New album", new_album_path %></li>
+    <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+  </ul>
 
-<div>
-  <button type="button">Click me</button>
-  <span id="countdown" style="display:none"></span>
-</div>
-
-<script>
-  navigator.getUserMedia  = navigator.getUserMedia ||
-                            navigator.webkitGetUserMedia ||
-                            navigator.mozGetUserMedia ||
-                            navigator.msGetUserMedia;
-
-  var video = document.querySelector('video');
-  var canvas = document.querySelector('canvas');
-  var button = document.querySelector('button');
-  var ctx = canvas.getContext('2d');
-  var img = document.querySelector('img');
-  var countdown = document.getElementById('countdown');
-  var localMediaStream = null;
-
-  function snapshot() {
-    if (localMediaStream) {
-      ctx.drawImage(video, 0, 0);
-      // "image/webp" works in Chrome.
-      // Other browsers will fall back to image/png.
-      img.src = canvas.toDataURL('image/webp');
-    }
-  }
-
-  function startCountdown() {
-    countdown.style.removeProperty('display');
-
-    var count = 5;
-    countdown.innerText = count;
-
-    var counter = setInterval(timer, 1000);
-
-    function timer() {
-      count--;
-      if (count === 0) {
-        countdown.style.setProperty('display', 'none');
-        clearInterval(counter);
-        snapshot();
-      }
-
-      countdown.innerText = count;
-    }
-  }
-
-  button.addEventListener('click', startCountdown, false);
-
-  if (navigator.getUserMedia) {
-    navigator.getUserMedia({video: true}, function(stream) {
-      video.src = window.URL.createObjectURL(stream);
-      localMediaStream = stream;
-    }, function(){alert('Failed');});
-  } else {
-    alert('Your browser is not supported.'); // fallback.
-  }
-</script>
+  <ul>
+    <% @albums.each do |album| %>
+      <li><%= link_to album.title, album %></li>
+    <% end %>
+  </ul>
+<% end %>
