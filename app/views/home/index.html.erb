@@ -1,7 +1,13 @@
 <h1>Photobooth</h1>
 <p>Welcome to the Photobooth</p>
 
-<video autoplay controls></video>
+<video autoplay></video>
+<img src="">
+<canvas style="display:none;"></canvas>
+
+<div>
+  <button type="button">Click me</button>
+</div>
 
 <script>
   var errorCallback = function(e) {
@@ -14,10 +20,26 @@
                             navigator.msGetUserMedia;
 
   var video = document.querySelector('video');
+  var canvas = document.querySelector('canvas');
+  var button = document.querySelector('button');
+  var ctx = canvas.getContext('2d');
+  var localMediaStream = null;
+
+  function snapshot() {
+    if (localMediaStream) {
+      ctx.drawImage(video, 0, 0);
+      // "image/webp" works in Chrome.
+      // Other browsers will fall back to image/png.
+      document.querySelector('img').src = canvas.toDataURL('image/webp');
+    }
+  }
+
+  button.addEventListener('click', snapshot, false);
 
   if (navigator.getUserMedia) {
     navigator.getUserMedia({video: true}, function(stream) {
       video.src = window.URL.createObjectURL(stream);
+      localMediaStream = stream;
     }, errorCallback);
   } else {
     alert('Your browser is not supported.'); // fallback.
