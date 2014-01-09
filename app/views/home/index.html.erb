@@ -7,7 +7,7 @@
 
 <div>
   <button type="button">Click me</button>
-  <span id="countdown"></span>
+  <span id="countdown" style="display:none"></span>
 </div>
 
 <script>
@@ -34,6 +34,8 @@
   }
 
   function startCountdown() {
+    countdown.style.removeProperty('display');
+
     var count = 5;
     countdown.innerText = count;
 
@@ -42,6 +44,7 @@
     function timer() {
       count--;
       if (count === 0) {
+        countdown.style.setProperty('display', 'none');
         clearInterval(counter);
         snapshot();
       }
