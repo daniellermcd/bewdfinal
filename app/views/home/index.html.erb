@@ -1,12 +1,28 @@
+<div class="row">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-8">
+        <h1>Click the "New Album" button to start.</h1>
+        <%= link_to 'Create a new album', new_album_path, class: 'btn btn-primary btn-block' %>
+      </div>
+      <div class="col-md-4">
+        <%= image_tag('logo.png', class: 'img-responsive') %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <% if user_signed_in? %>
   <% if @albums.empty? %>
-    Click the "New Album" button to start!
+    You don't have any albums yet.
   <% else %>
-    <h2>Your Albums:</h2>
-    <ul>
+    <div class="row">
       <% @albums.each do |album| %>
-        <li><%= link_to album.title, album %></li>
+      <div class="panel panel-default col-md-3">
+        <h2><%= link_to album.title, album %></h2>
+        <%= link_to(image_tag('logo.png', class: 'img-responsive'), album) %>
+      </div>
       <% end %>
-    </ul>
+    </div>
   <% end %>
 <% end %>

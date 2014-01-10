@@ -2,34 +2,35 @@
 <html>
   <head>
     <title>Photo Booth</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
 
-  <header>
-    <h1><%= link_to 'Photo Booth', root_path %></h1>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <% if !user_signed_in? %>
-      <ul>
-        <li><%= link_to "Sign up", new_user_registration_path %></li>
-        <li><%= link_to "Log in", new_user_session_path %></li>
-      </ul>
-    <% else %>
-      <ul>
-        <li><%= link_to "New album", new_album_path %></li>
-        <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-      </ul>
-    <% end %>
-  </header>
-
   <body>
-    <%= yield %>
-  </body>
+    <div class="container">
+      <header class="row">
+        <nav class="navbar navbar-pills">
+          <div class="navbar-header">
+            <%= link_to(image_tag('logo.png', class: 'logo', width: '50px'), root_path, class: 'pull-left') %>
+            <%= link_to 'Photo Booth', root_path, class: 'navbar-brand' %>
+          </div>
+          <ul class="nav navbar-nav">
+            <% if !user_signed_in? %>
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <li><%= link_to "Log in", new_user_session_path %></li>
+            <% else %>
+              <li><%= link_to "New album", new_album_path %></li>
+              <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+            <% end %>
+          </ul>
+        </nav>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </header>
 
-  <footer>
-  </footer>
+      <%= yield %>
+    </div>
+  </body>
 </html>
