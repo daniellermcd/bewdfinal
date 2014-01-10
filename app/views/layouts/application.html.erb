@@ -7,9 +7,29 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body>
+  <header>
+    <h1><%= link_to 'Photo Booth', root_path %></h1>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
+    <% if !user_signed_in? %>
+      <ul>
+        <li><%= link_to "Sign up", new_user_registration_path %></li>
+        <li><%= link_to "Log in", new_user_session_path %></li>
+      </ul>
+    <% else %>
+      <ul>
+        <li><%= link_to "New album", new_album_path %></li>
+        <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+      </ul>
+    <% end %>
+  </header>
+
+  <body>
     <%= yield %>
   </body>
+
+  <footer>
+  </footer>
 </html>

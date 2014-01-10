@@ -1,19 +1,12 @@
-<%= render 'header' %>
-
-<% if !user_signed_in? %>
-  <ul>
-    <li><%= link_to "Sign up", new_user_registration_path %></li>
-    <li><%= link_to "Log in", new_user_session_path %></li>
-  </ul>
-<% else %>
-  <ul>
-    <li><%= link_to "New album", new_album_path %></li>
-    <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-  </ul>
-
-  <ul>
-    <% @albums.each do |album| %>
-      <li><%= link_to album.title, album %></li>
-    <% end %>
-  </ul>
+<% if user_signed_in? %>
+  <% if @albums.empty? %>
+    Click the "New Album" button to start!
+  <% else %>
+    <h2>Your Albums:</h2>
+    <ul>
+      <% @albums.each do |album| %>
+        <li><%= link_to album.title, album %></li>
+      <% end %>
+    </ul>
+  <% end %>
 <% end %>

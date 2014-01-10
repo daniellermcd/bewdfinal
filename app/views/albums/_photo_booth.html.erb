@@ -3,14 +3,14 @@
 <canvas width="500px" height="400px" style="display:none;"></canvas>
 
 <div>
-  <button type="button">Click me</button>
+  <button type="button">Take Photo!</button>
   <span id="countdown" style="display:none"></span>
 </div>
 
-<%= form_for @photo do |f| %>
-  <%= f.hidden_field :url %>
-  <%= f.hidden_field :album_id, :value => @album.id %>
-  <%= f.submit 'Save photo' %>
+<%= form_tag '/photos' do %>
+  <%= hidden_field_tag :photo_url %>
+  <%= hidden_field_tag :album_id, @album.id %>
+  <%= submit_tag 'Save photo' %>
 <% end %>
 
 <script>
@@ -39,7 +39,9 @@
 
   function startCountdown() {
     countdown.style.removeProperty('display');
+    button.innerText = 'Counting down...';
 
+    // change count back to 5 when finished testing
     var count = 1;
     countdown.innerText = count;
 
@@ -49,6 +51,7 @@
       count--;
       if (count === 0) {
         countdown.style.setProperty('display', 'none');
+        button.innerText = 'Retake Photo'
         clearInterval(counter);
         snapshot();
       }

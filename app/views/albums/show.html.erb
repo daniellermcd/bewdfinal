@@ -1,15 +1,15 @@
 <div>
-  Album title: <%= @album.title %><br />
-  Created by: <%= @album.user.email %>
+  <h2><%= @album.title %></h2>
+  <h3><%= @username %></h3>
 </div>
 
 <%= render 'photo_booth' %>
 
 <div>
   <% if @album_photos.empty? %>
-    blah
+    Start taking some photos! Click the "Take Photo" button above.
   <% else %>
-    <%= @album_photos.map do |photo| %>
+    <%= @album_photos.reverse.map do |photo| %>
       <%= image_tag photo.url %>
     <% end %>
   <% end %>
