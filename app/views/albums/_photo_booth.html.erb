@@ -1,16 +1,21 @@
-<video autoplay></video>
-<img src="">
-<canvas width="500px" height="400px" style="display:none;"></canvas>
+<video class="video" width="700px" height="526px" autoplay></video>
+<img src="" class="snapshot" width="700px" height="526px">
 
 <div>
-  <button type="button">Take Photo!</button>
-  <span id="countdown" style="display:none"></span>
+  <canvas width="700px" height="526px" style="display:none;"></canvas>
 </div>
 
-<%= form_tag '/photos' do %>
-  <%= hidden_field_tag :photo_url %>
-  <%= hidden_field_tag :album_id, @album.id %>
-  <%= submit_tag 'Save photo' %>
-<% end %>
+<div class="controls">
+  <div class="countdown">
+    <button type="button" class="btn btn-default">Start countdown!</button>
+    <span id="countdown" style="display:none"></span>
+  </div>
+
+  <%= form_tag '/photos' do %>
+    <%= hidden_field_tag :photo_url %>
+    <%= hidden_field_tag :album_id, @album.id %>
+    <%= submit_tag 'Save photo', class: 'btn btn-success' %>
+  <% end %>
+</div>
 
 <%= javascript_include_tag "photobooth" %>
