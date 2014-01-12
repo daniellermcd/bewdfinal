@@ -16,19 +16,19 @@
             <%= link_to 'Photo Booth', root_path, class: 'navbar-brand' %>
           </div>
 
-          <ul class="nav navbar-nav navbar-left">
-            <% if !user_signed_in? %>
-              <li><%= link_to 'Sign up', new_user_registration_path %></li>
-              <li><%= link_to 'Log in', new_user_session_path %></li>
-            <% else %>
+          <% if user_signed_in? %>
+            <ul class="nav navbar-nav navbar-left">
               <li><%= link_to 'My albums', '/albums' %></li>
               <li><%= link_to 'New album', new_album_path %></li>
-            <% end %>
-          </ul>
+            </ul>
 
-          <% if user_signed_in? %>
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          <% else %>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to 'Sign up', new_user_registration_path %></li>
+              <li><%= link_to 'Log in', new_user_session_path %></li>
             </ul>
           <% end %>
         </nav>
