@@ -7,17 +7,17 @@ var video = document.querySelector('video');
 var canvas = document.querySelector('canvas');
 var button = document.querySelector('button');
 var ctx = canvas.getContext('2d');
-var img = document.querySelector('img');
-var photo_url_field = document.querySelector('#photo_url');
+var preview_img = document.querySelector('img');
+var image_data_url = document.querySelector('#image_data_url');
 var countdown = document.getElementById('countdown');
 var localMediaStream = null;
 
 function snapshot() {
   if (localMediaStream) {
     ctx.drawImage(video, 0, 0);
-    var url = canvas.toDataURL('image/png');
-    img.src = url;
-    photo_url_field.value = url;
+    var data_url = canvas.toDataURL('image/png');
+    preview_img.src = data_url;
+    image_data_url.value = data_url;
   }
 }
 

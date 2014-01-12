@@ -12,7 +12,7 @@
   </div>
 
   <%= form_tag '/photos' do %>
-    <%= hidden_field_tag :photo_url %>
+    <%= hidden_field_tag :image_data_url %>
     <%= hidden_field_tag :album_id, @album.id %>
     <%= submit_tag 'Save photo', class: 'btn btn-success' %>
   <% end %>
