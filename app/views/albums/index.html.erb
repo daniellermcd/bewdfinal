@@ -1,0 +1,20 @@
+<h1>My Albums</h1>
+
+<% if user_signed_in? %>
+  <% if @albums.empty? %>
+    <div>
+      <strong>No albums yet.</strong>
+    </div>
+    <%= link_to 'Create a new photo album', new_album_path, class: 'btn btn-primary' %>
+  <% else %>
+    <div class="row">
+      <% @albums.each do |album| %>
+      <div class="panel panel-default col-md-3" style="height:300px; background-image:url(<%= album.photos.first.url %>)">
+        <h2 class="panel panel-default-heading" style="padding:5px; text-align:center">
+          <%= link_to "#{album.title} (#{album.photos.count})", album %>
+        </h2>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

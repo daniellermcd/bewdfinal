@@ -21,7 +21,7 @@
               <li><%= link_to 'Sign up', new_user_registration_path %></li>
               <li><%= link_to 'Log in', new_user_session_path %></li>
             <% else %>
-              <li><%= link_to 'My albums', '#' %></li>
+              <li><%= link_to 'My albums', '/albums' %></li>
               <li><%= link_to 'New album', new_album_path %></li>
             <% end %>
           </ul>
