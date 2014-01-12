@@ -7,13 +7,12 @@
   </ul>
 <% end %>
 
-<%= form_for @album do |f| %>
-  <fieldset>
-    <legend>Create a new album:</legend>
-    <div>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
+<%= form_for @album, html: { role: 'form' } do |f| %>
+    <legend>Create a new album</legend>
+
+    <div class="form-group">
+      <%= f.text_field :title, class: 'form-control', type: 'text', autofocus: true, placeholder: 'Name your album' %>
     </div>
-  </fieldset>
-  <%= f.submit %>
+
+  <%= f.submit 'Get started', class: 'btn btn-primary' %>
 <% end %>
