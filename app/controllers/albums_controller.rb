@@ -1,4 +1,6 @@
 class AlbumsController < ApplicationController
+  force_ssl unless Rails.env.development?
+
   before_action :authenticate_user!
 
   def index
