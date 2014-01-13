@@ -8,9 +8,14 @@
   </div>
 
   <div class="form-group">
+    <%= f.check_box :private, class: 'checkbox' %>
+    <%= f.label :private, 'Only I can see this album',  class: (current_page?(root_path) ? 'checkbox-label checkbox-home jumbotron-text' : 'checkbox-label') %>
+  </div>
+
+  <div class="form-group">
     <% if current_page? root_path %>
       <%= f.submit 'Get started', class: 'btn btn-primary' %>
-      <%= current_user.albums.empty? ? nil : (link_to 'Browse my albums', albums_path, class: "btn btn-default") %>
+      <%= current_user.albums.empty? ? nil : (link_to 'Skip and browse my albums', albums_path, class: "btn btn-default") %>
 
     <% elsif current_page? new_album_path %>
       <%= f.submit 'Get started', class: 'btn btn-primary' %>

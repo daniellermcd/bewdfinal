@@ -8,6 +8,6 @@
     <%= ( link_to 'Enter the photo booth!',
           "/albums/#{@album.id}/photobooth",
           class: 'btn btn-primary btn-lg btn-block title-button hidden-xs hidden-sm'
-        ) if current_page? album_path %>
+        ) if current_page? album_path and current_user == @album.user %>
   </div>
 </div>

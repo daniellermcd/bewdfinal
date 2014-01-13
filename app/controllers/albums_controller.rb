@@ -65,6 +65,6 @@ class AlbumsController < ApplicationController
   end
 
   def safe_album_params
-    safe_album_params = params.require(:album).permit(:title)
+    safe_album_params = params.require(:album).permit(:title, :private)
   end
 end
