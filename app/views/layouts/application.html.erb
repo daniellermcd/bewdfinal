@@ -30,7 +30,7 @@
                       <li><%= link_to album.title, album %></li>
                     <% end %>
                     <li class="divider"></li>
-                    <li><%= link_to "See all (#{current_user.albums.count})", '/albums' %></li>
+                    <li><%= link_to "See all (#{current_user.albums.count})", albums_path %></li>
                   <% end %>
                 </ul>
               </li>

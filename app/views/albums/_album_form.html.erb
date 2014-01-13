@@ -1,0 +1,30 @@
+<%= form_for @album, html: { role: 'form', class: 'well' } do |f| %>
+  <%= render 'layouts/error_messages', object: f.object %>
+
+  <legend>
+    <% if params[:id] %>
+      Edit your album title
+    <% else current_page? root_path %>
+      Create a new album
+    <% end %>
+  </legend>
+
+  <div class="form-group">
+    <%= f.text_field :title, class: 'form-control', type: 'text', autofocus: true, placeholder: 'Name your album', maxlength: 45 %>
+  </div>
+
+  <div class="form-group">
+    <% if current_page? root_path %>
+      <%= f.submit 'Get started', class: 'btn btn-primary' %>
+      <%= link_to 'Browse my albums', albums_path, class: "btn btn-default" %>
+
+    <% elsif current_page? new_album_path %>
+      <%= f.submit 'Get started', class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', albums_path, class: "btn btn-default" %>
+
+    <% else %>
+      <%= f.submit 'Update', class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', albums_path, class: "btn btn-default" %>
+    <% end %>
+  </div>
+<% end %>
