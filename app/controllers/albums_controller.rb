@@ -2,6 +2,7 @@ class AlbumsController < ApplicationController
   force_ssl unless Rails.env.development?
 
   before_action :authenticate_user!
+  before_filter :validate_user, only: [:show, :photobooth]
 
   def index
     @albums = current_user.albums
@@ -40,5 +41,10 @@ class AlbumsController < ApplicationController
 
   def album
     Album.find params[:id]
+  end
+
+  def validate_user
+    album_owner = Album.find(params[:id]).user
+    redirect_to root_path unless current_user and current_user.id == album_owner.id
   end
 end
