@@ -1,4 +1,4 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form', class: 'well' }) do |f| %>
   <legend>Log in to your account</legend>
 
   <div class="form-group">
@@ -16,6 +16,8 @@
     </div>
   <% end %>
 
-  <%= f.submit 'Log in', class: 'btn btn-primary' %>
-  <%= link_to 'Sign up', new_user_registration_path %>
+  <div class="form-group">
+    <%= f.submit 'Log in', class: 'btn btn-primary' %>
+    <%= link_to 'Sign up', new_user_registration_path %>
+  </div>
 <% end %>
