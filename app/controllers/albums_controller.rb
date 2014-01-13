@@ -6,32 +6,30 @@ class AlbumsController < ApplicationController
   before_action :authenticate_user!
   before_filter :validate_user, only: [:show, :photobooth]
 
+  def create
+    @album = current_user.albums.new safe_album_params
+    @album.save ? redirect_to(@album) : render(:new)
+  end
+
+  def edit
+  end
+
   def index
     @albums = current_user.albums
-  end
-
-  def photobooth
-  end
-
-  def show
-    @album_photos = @album.photos
   end
 
   def new
     @album = Album.new
   end
 
-  def create
-    @album = current_user.albums.new safe_album_params
-
-    if @album.save
-      redirect_to @album
-    else
-      render :new
-    end
+  def photobooth
   end
 
-  def edit
+  def share
+  end
+
+  def show
+    @album_photos = @album.photos
   end
 
   def update

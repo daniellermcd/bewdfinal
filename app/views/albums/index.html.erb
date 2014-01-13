@@ -8,12 +8,12 @@
     <%= link_to 'Create a new photo album', new_album_path, class: 'btn btn-primary' %>
   <% else %>
     <div class="row">
-      <% @albums.each do |album| %>
+      <% @albums.reverse.each do |album| %>
         <div class="col-sm-6 col-md-3">
           <div class="thumbnail">
-            <%= image_tag(album.photos.first ? album.photos.first.url : 'placeholder.png') %>
+            <%= link_to(image_tag(album.photos.first ? album.photos.first.url : 'placeholder.png'), album_path(album)) %>
             <div class="caption">
-              <h3><%= album.title %></h3>
+              <h3><%= link_to album.title, album_path(album) %></h3>
               <p>
                 <%= link_to 'View', album_path(album), class: 'btn btn-info btn-sm' %>
                 <%= link_to content_tag(:span, nil, class: 'glyphicon glyphicon-share-alt'), '#', class: 'btn btn-default btn-sm' %>
