@@ -50,7 +50,7 @@ if (navigator.getUserMedia) {
   navigator.getUserMedia({video: true}, function(stream) {
     video.src = window.URL.createObjectURL(stream);
     localMediaStream = stream;
-  }, function(){alert('Failed');});
+  }, function(){console.log('Failed');});
 } else {
   alert('Your browser is not supported.'); // fallback.
 }
