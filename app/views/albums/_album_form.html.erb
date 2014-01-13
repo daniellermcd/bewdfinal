@@ -1,13 +1,7 @@
 <%= form_for @album, html: { role: 'form', class: 'well' } do |f| %>
   <%= render 'layouts/error_messages', object: f.object %>
 
-  <legend>
-    <% if params[:id] %>
-      Edit your album title
-    <% else %>
-      Create a new album
-    <% end %>
-  </legend>
+  <%= params[:id] ? content_tag(:legend, 'Edit your album') : content_tag(:legend, 'Create a new album') %>
 
   <div class="form-group">
     <%= f.text_field :title, class: 'form-control', type: 'text', autofocus: true, placeholder: 'Name your album', maxlength: 45 %>
