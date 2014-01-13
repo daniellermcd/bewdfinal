@@ -1,18 +1,1 @@
-<% if @album.errors.any? %>
-  <h2>The following errors prevented your album from saving:</h2>
-  <ul>
-    <% @album.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= form_for @album, html: { role: 'form' } do |f| %>
-    <legend>Create a new album</legend>
-
-    <div class="form-group">
-      <%= f.text_field :title, class: 'form-control', type: 'text', autofocus: true, placeholder: 'Name your album', maxlength: 45 %>
-    </div>
-
-  <%= f.submit 'Get started', class: 'btn btn-primary' %>
-<% end %>
+<%= render 'new_album' %>
