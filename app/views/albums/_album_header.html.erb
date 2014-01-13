@@ -1,4 +1,13 @@
-<div>
-  <h1><%= link_to @album.title, @album %></h1>
-  <strong><%= link_to @username, albums_path %></strong>
+<div class="row title-row">
+  <div class="col-md-8">
+    <h1><%= link_to @album.title, @album %></h1>
+    <strong><%= link_to @username, albums_path %></strong>
+  </div>
+
+  <div class="col-md-4">
+    <%= ( link_to 'Enter the photo booth!',
+          "/albums/#{@album.id}/photobooth",
+          class: 'btn btn-primary btn-lg btn-block title-button hidden-xs hidden-sm'
+        ) if current_page? album_path %>
+  </div>
 </div>
