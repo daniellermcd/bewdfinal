@@ -11,7 +11,7 @@
     <legend>Create a new album</legend>
 
     <div class="form-group">
-      <%= f.text_field :title, class: 'form-control', type: 'text', autofocus: true, placeholder: 'Name your album' %>
+      <%= f.text_field :title, class: 'form-control', type: 'text', autofocus: true, placeholder: 'Name your album', maxlength: 45 %>
     </div>
 
   <%= f.submit 'Get started', class: 'btn btn-primary' %>
