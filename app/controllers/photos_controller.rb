@@ -5,9 +5,13 @@ class PhotosController < ApplicationController
     photobooth = "/albums/#{album_id}/photobooth"
     imageData = params[:image_data_url]['data:image/png;base64,'.length .. -1]
 
-    photo = convert_to_png(imageData)
+    # decode base64 data and save as a PNG
+    convert_to_png(imageData)
 
+    # send temporary image to S3 and return it's URL
     photo_url = Photo.get_s3_url(album_id)
+
+    # save photo record to database
     album.photos.create url: photo_url
     redirect_to photobooth
   end

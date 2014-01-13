@@ -47,8 +47,8 @@ class AlbumsController < ApplicationController
   end
 
   def validate_user
-    album_owner = Album.find(params[:id]).user
-    redirect_to root_path unless current_user and current_user.id == album_owner.id
+    album_owner_id = Album.find(params[:id]).user.id
+    redirect_to root_path unless current_user and current_user.id == album_owner_id
   end
 
   def safe_album_params

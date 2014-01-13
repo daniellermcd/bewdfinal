@@ -19,9 +19,9 @@
 
           <% if user_signed_in? %>
             <ul class="nav navbar-nav navbar-left">
+
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">My albums <b class="caret"></b></a>
-
                 <ul class="dropdown-menu">
                   <% if current_user.albums.empty? %>
                     <li><span class="no-albums">No albums yet.</span></li>

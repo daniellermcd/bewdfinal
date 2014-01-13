@@ -16,7 +16,7 @@
   <div class="form-group">
     <% if current_page? root_path %>
       <%= f.submit 'Get started', class: 'btn btn-primary' %>
-      <%= link_to 'Browse my albums', albums_path, class: "btn btn-default" %>
+      <%= current_user.albums.empty? ? nil : (link_to 'Browse my albums', albums_path, class: "btn btn-default") %>
 
     <% elsif current_page? new_album_path %>
       <%= f.submit 'Get started', class: 'btn btn-primary' %>
