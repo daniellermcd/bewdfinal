@@ -1,7 +1,4 @@
-<div>
-  <h1><%= @album.title %></h1>
-  <strong><%= @username %></strong>
-</div>
+<%= render 'album_header' %>
 
 <%= link_to 'Enter the photo booth!', "/albums/#{@album.id}/photobooth", class: 'btn btn-primary btn-lg' %>
 

@@ -1,26 +1,29 @@
-<div>
-  <h2><%= @album.title %></h2>
-  <strong><%= @username %></strong>
-</div>
+<%= render 'album_header' %>
 
-<video class="video" width="700px" height="526px" autoplay></video>
-<img src="" class="snapshot" width="700px" height="526px">
+<video class="video" height="525px" autoplay></video>
+<img src="" class="snapshot" width="525px" height="525px">
 
 <div>
-  <canvas width="700px" height="526px" style="display:none;"></canvas>
+  <canvas width="525px" height="525px" style="display:none;"></canvas>
 </div>
 
 <div class="controls">
   <div class="countdown">
-    <button type="button" class="btn btn-default">Start countdown!</button>
-    <span id="countdown" style="display:none"></span>
+    <button type="button" id="take-photo" class="btn btn-primary btn-lg">Start countdown!</button>
+    <span id="ctdn" style="display:none"></span>
   </div>
 
-  <%= form_tag '/photos' do %>
-    <%= hidden_field_tag :image_data_url %>
-    <%= hidden_field_tag :album_id, @album.id %>
-    <%= submit_tag 'Save photo', class: 'btn btn-success' %>
-  <% end %>
+  <div class="hidden-form">
+    <%= form_tag '/photos' do %>
+      <%= hidden_field_tag :image_data_url %>
+      <%= hidden_field_tag :album_id, @album.id %>
+      <%= submit_tag 'Save photo', class: 'btn btn-success btn-lg', id: 'save-photo', disabled: 'true' %>
+    <% end %>
+  </div>
+
+  <div class="finished">
+    <%= link_to 'Finished', album_path(@album), class: 'btn btn-default' %>
+  </div>
 </div>
 
 <%= javascript_include_tag "photobooth" %>
