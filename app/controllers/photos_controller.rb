@@ -3,10 +3,10 @@ class PhotosController < ApplicationController
     album_id = params[:album_id]
     album = Album.find album_id
     photobooth = "/albums/#{album_id}/photobooth"
-    imageData = params[:image_data_url]['data:image/png;base64,'.length .. -1]
+    image_data = params[:image_data_url]['data:image/png;base64,'.length .. -1]
 
     # decode base64 data and save as a PNG
-    convert_to_png(imageData)
+    convert_to_png(image_data)
 
     # send temporary image to S3 and return it's URL
     photo_url = Photo.get_s3_url(album_id)
@@ -17,8 +17,8 @@ class PhotosController < ApplicationController
   end
 
   private
-  def convert_to_png(imageData)
-    b = Base64.decode64(imageData)
+  def convert_to_png(image_data)
+    b = Base64.decode64(image_data)
     File.open('tmp_snapshot.png', 'wb') { |file| file.write b }
   end
 end
