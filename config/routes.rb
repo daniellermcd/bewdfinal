@@ -1,8 +1,14 @@
 Photobooth::Application.routes.draw do
-  root "home#index"
-  resources :photos, only: :create
+  root 'home#index'
+
   resources :albums
-  get '/albums', to: 'albums#index'
+  resources :photos, only: :create
+
   get '/albums/:id/photobooth', to: 'albums#photobooth'
-  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup' }
+
+  devise_for :users, path_names: {
+    sign_in: 'login',
+    sign_out: 'logout',
+    sign_up: 'signup'
+  }
 end
