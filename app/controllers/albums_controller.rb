@@ -8,7 +8,7 @@ class AlbumsController < ApplicationController
 
   def create
     @album = current_user.albums.new safe_album_params
-    @album.save ? redirect_to(@album) : render(:new)
+    @album.save ? redirect_to("/albums/#{@album.id}/photobooth") : render(:new)
   end
 
   def edit
@@ -29,7 +29,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album_photos = @album.photos
+    @album_photos = @album.photos.reverse.map { |photo| photo.url }
   end
 
   def update
@@ -39,7 +39,7 @@ class AlbumsController < ApplicationController
 
   private
   def set_username
-    @album.user.email[/[^@]+/]
+    @username = @album.user.email[/[^@]+/]
   end
 
   def set_album

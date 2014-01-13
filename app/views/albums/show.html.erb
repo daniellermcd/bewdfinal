@@ -1,16 +1,18 @@
 <div>
-  <h2><%= @album.title %></h2>
+  <h1><%= @album.title %></h1>
   <strong><%= @username %></strong>
 </div>
 
-<%= link_to 'Take some photos', "/albums/#{@album.id}/photobooth", class: 'btn btn-primary btn-lg' %>
+<%= link_to 'Enter the photo booth!', "/albums/#{@album.id}/photobooth", class: 'btn btn-primary btn-lg' %>
 
-<div>
-  <% if @album_photos.empty? %>
-    You don't have any photos yet. Click the button above to start!
-  <% else %>
-    <%= @album_photos.reverse.map do |photo| %>
-      <%= image_tag photo.url %>
+<% if !@album_photos.empty? %>
+  <div class="row">
+    <% @album_photos.each do |url| %>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+          <%= link_to image_tag(url), '#' %>
+        </div>
+      </div>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>
