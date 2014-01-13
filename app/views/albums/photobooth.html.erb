@@ -1,10 +1,15 @@
-<%= render 'album_header' %>
+<div class="photobooth-header">
+  <%= render 'album_header' %>
+</div>
+
+<div class="video-border"></div>
 
 <video class="video" height="525px" autoplay></video>
+
 <img src="" class="snapshot" width="525px" height="525px">
 
 <div>
-  <canvas width="525px" height="525px" style="display:none;"></canvas>
+  <canvas width="480px" height="480px" style="display:none;"></canvas>
 </div>
 
 <div class="controls">

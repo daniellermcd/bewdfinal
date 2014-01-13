@@ -15,7 +15,7 @@ var localMediaStream = null;
 
 function snapshot() {
   if (localMediaStream) {
-    ctx.drawImage(video, 0, 0);
+    ctx.drawImage(video, -90, 0);
     var dataURL = canvas.toDataURL('image/png');
     previewImg.src = dataURL;
     imageDataURL.value = dataURL;
@@ -27,6 +27,7 @@ function startCountdown() {
   savePhotoAlbum.disabled = true;
   takePhotoButton.disabled = true;
   takePhotoButton.innerText = 'Counting down...';
+  previewImg.src = '';
 
   var count = 4;
   countdown.innerText = count;

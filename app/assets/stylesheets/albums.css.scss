@@ -3,18 +3,19 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .video {
   position: absolute;
-  left: 60px;
-  z-index: 0;
+  left: 63px;
+  z-index: -3;
 }
 
 .snapshot {
   position: absolute;
-  z-index: 1;
+  z-index: 0;
 }
 
 .controls {
   position: relative;
   left: 550px;
+  z-index: 2;
 }
 
 .countdown {
@@ -31,4 +32,20 @@
 
 .title-button {
   margin-top: 18px;
+}
+
+.photobooth-header {
+  z-index: 3;
+}
+
+.video-border {
+  position: absolute;
+  margin: -90px 0 0 -90px;
+  display: block;
+  height: 705px;
+  width: 705px;
+  border-width: 90px;
+  border-color: #fff;
+  border-style: solid;
+  z-index: -2;
 }
