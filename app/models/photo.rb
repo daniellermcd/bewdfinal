@@ -9,14 +9,14 @@ class Photo < ActiveRecord::Base
     object_key = "#{album_id}/snapshot_#{Time.now.strftime("%Y-%m-%d-%H%M%S")}.png"
     public_url = "http://s3.amazonaws.com/#{bucket}/#{object_key}"
 
-    storage = AWS::S3::Base.establish_connection!(
+    AWS::S3::Base.establish_connection!(
       access_key_id: ENV['S3_KEY'],
       secret_access_key: ENV['S3_SECRET']
     )
 
-    response = AWS::S3::S3Object.store(
+    AWS::S3::S3Object.store(
       object_key,
-      File.open('temp_photo.png'),
+      File.open('tmp_snapshot.png'),
       bucket, access: :public_read
     )
 
