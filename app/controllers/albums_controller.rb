@@ -5,10 +5,15 @@ class AlbumsController < ApplicationController
     @albums = current_user.albums
   end
 
+  def photobooth
+    @album = album
+    @username = username
+  end
+
   def show
-    @album = Album.find params[:id]
+    @album = album
+    @username = username
     @album_photos = @album.photos
-    @username = @album.user.email[/[^@]+/]
   end
 
   def new
@@ -24,5 +29,14 @@ class AlbumsController < ApplicationController
     else
       render :new
     end
+  end
+
+  private
+  def username
+    @album.user.email[/[^@]+/]
+  end
+
+  def album
+    Album.find params[:id]
   end
 end
