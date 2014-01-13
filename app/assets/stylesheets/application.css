@@ -13,3 +13,6 @@
  *= cosmo
  *= require_tree .
  */
+.no-albums {
+  margin: 20px;
+}

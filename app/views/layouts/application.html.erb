@@ -19,7 +19,22 @@
 
           <% if user_signed_in? %>
             <ul class="nav navbar-nav navbar-left">
-              <li><%= link_to 'My albums', '/albums' %></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">My albums <b class="caret"></b></a>
+
+                <ul class="dropdown-menu">
+                  <% if current_user.albums.empty? %>
+                    <li><span class="no-albums">No albums yet.</span></li>
+                  <% else %>
+                    <% current_user.albums.first(5).each do |album| %>
+                      <li><%= link_to album.title, album %></li>
+                    <% end %>
+                    <li class="divider"></li>
+                    <li><%= link_to "View all (#{current_user.albums.count})", '/albums' %></li>
+                  <% end %>
+                </ul>
+              </li>
+
               <li><%= link_to 'New album', new_album_path %></li>
             </ul>
 
