@@ -16,7 +16,7 @@ class Photo < ActiveRecord::Base
 
     AWS::S3::S3Object.store(
       object_key,
-      File.open('tmp_snapshot.png'),
+      File.open("tmp_snapshot_album_#{album_id}.png"),
       bucket, access: :public_read
     )
 
