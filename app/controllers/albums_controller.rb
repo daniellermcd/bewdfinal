@@ -1,10 +1,12 @@
 class AlbumsController < ApplicationController
   force_ssl unless Rails.env.development?
 
-  before_action :set_album, only: [:photobooth, :show, :edit, :update]
+  before_action :set_album, except: [:new, :create, :index]
   before_action :set_username, only: [:photobooth, :show]
-  before_action :authenticate_user!
-  before_filter :validate_user, only: [:show, :photobooth]
+  before_action :authenticate_user!, except: :show
+
+  before_filter :validate_user_view_privileges, only: :show
+  before_filter :validate_user_photobooth_privileges, only: :photobooth
 
   def create
     @album = current_user.albums.new safe_album_params
@@ -46,8 +48,19 @@ class AlbumsController < ApplicationController
     @album = Album.find params[:id]
   end
 
-  def validate_user
-    album_owner_id = Album.find(params[:id]).user.id
+  def album_private?
+    @album.private
+  end
+
+  def validate_user_view_privileges
+    album_owner_id = @album.user.id
+    if album_private?
+      redirect_to(root_path, alert: 'You don\'t have permission to view this album.') unless current_user and current_user.id == album_owner_id
+    end
+  end
+
+  def validate_user_photobooth_privileges
+    album_owner_id = @album.user.id
     redirect_to root_path unless current_user and current_user.id == album_owner_id
   end
 
