@@ -8,4 +8,7 @@
   </div>
 
   <%= f.submit 'Get started', class: 'btn btn-primary' %>
+  <% if current_page? new_album_path %>
+    <%= link_to 'Cancel', '/albums', class: "btn btn-default" %>
+  <% end %>
 <% end %>
