@@ -14,6 +14,6 @@ class PhotosController < ApplicationController
   private
   def convert_to_png(imageData)
     b = Base64.decode64(imageData)
-    File.open('temp_photo.png', 'wb') { |file| file.write b }
+    File.open('tmp_snapshot.png', 'wb') { |file| file.write b }
   end
 end
