@@ -27,9 +27,6 @@ class AlbumsController < ApplicationController
   def photobooth
   end
 
-  def share
-  end
-
   def show
     @album_photos = @album.photos.reverse.map { |photo| photo.url }
   end
