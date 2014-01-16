@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .video {
   position: absolute;
-  left: 63px;
+  left: 52px;
   z-index: -3;
 }
 
@@ -40,13 +40,11 @@
 
 .video-border {
   position: absolute;
-  margin: -90px 0 0 -90px;
+  margin: -100px 0 0 -100px;
   display: block;
-  height: 705px;
-  width: 705px;
-  border-width: 90px;
-  border-color: #fff;
-  border-style: solid;
+  height: 725px;
+  width: 725px;
+  border: 100px solid #fff;
   z-index: -2;
 }
 
