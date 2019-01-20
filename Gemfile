@@ -16,6 +16,8 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 # Use SCSS for stylesheets
